@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #0b5ecd;
+  --dark: #111923;
+  --darker: #112034;
+  --background-dark: #121212;
+  --text-base: #d4c2ff;
+
+  --white: #fff;
+  --black: #111;
+
+  font-size: 62.5%;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  outline: 0px;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-size: 1.8rem;
+}
