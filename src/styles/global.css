@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 
 :root {
   --primary: #0b5ecd;
@@ -30,6 +31,7 @@ body,
 
 body {
   font-size: 1.8rem;
+  font-family: "Nunito", sans-serif;
 }
 
 @layer base {

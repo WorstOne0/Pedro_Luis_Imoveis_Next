@@ -1,7 +1,7 @@
 // Next
 import { MapProvider } from "@/services/google_maps";
 // Components
-import { GoogleMaps, RealEstateCard } from "@/components";
+import { GoogleMaps, RealEstateCard, Searchbar } from "@/components";
 // Styles
 import styles from "./styles.module.css";
 
@@ -13,12 +13,12 @@ export default function Search() {
       <div className="h-full w-full relative">
         <GoogleMaps />
 
-        <div className="h-[calc(100%-2rem)] w-[50rem] bg-blue-500 rounded-[0.8rem] flex flex-col absolute top-[1rem] left-[1rem]">
-          <div className="h-[6rem] w-full bg-red-500">searchbar</div>
+        <div className="h-[calc(100%-2rem)] w-[50rem] bg-white rounded-[0.8rem] flex flex-col absolute top-[1rem] left-[1rem]">
+          <Searchbar />
 
-          <div className="grow px-2 overflow-y-auto">
+          <div className="grow px-3 overflow-y-auto">
             {teste.map((item, index) => (
-              <RealEstateCard key={`real_estate_card_${index}`} realEstate={item} />
+              <RealEstateCard realEstate={item} key={`real_estate_card_${index}`} />
             ))}
           </div>
         </div>
