@@ -29,7 +29,11 @@ export default function RealEstateCard({ realEstate }: { realEstate: any }) {
 
   return (
     <Card className="mt-4 rounded-[0.8rem]" onClick={handleCardClick}>
-      <div className={`pb-3 flex flex-col select-none cursor-pointer rounded-[0.8rem] ${isSelected ? "border-2 border-blue-600" : ""}`}>
+      <div
+        className={`pb-3 flex flex-col select-none cursor-pointer rounded-[0.8rem] 
+          ${isSelected ? "border-2 border-blue-600" : "border-2 border-transparent"}
+          `}
+      >
         {/* Imagem */}
         <div className={`h-[19rem] w-full rounded-t-[0.8rem] ${imgUrlClass} relative`}>
           <div className="absolute bottom-4 right-4" onClick={handleFavoriteClick}>

@@ -4,6 +4,8 @@
 import { Nunito } from "next/font/google";
 // Components
 import { NavBar } from "@/components";
+// Services
+import { MapProvider } from "@/services/google_maps";
 // Styles
 import "@/styles/global.css";
 
@@ -18,7 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`w-full flex flex-col ${nunito.className} antialiased`}>
         <NavBar />
-        {children}
+        <MapProvider>{children}</MapProvider>
       </body>
     </html>
   );

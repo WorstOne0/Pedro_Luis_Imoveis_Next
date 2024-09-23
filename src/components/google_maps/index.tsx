@@ -4,10 +4,10 @@ import { GoogleMap } from "@react-google-maps/api";
 
 export default function GoogleMaps({ height = "100%", width = "100%" }: { height?: string; width?: string }) {
   const defaultMapCenter = {
-    lat: 35.8799866,
-    lng: 76.5048004,
+    lat: -24.960731,
+    lng: -53.519697,
   };
-  const defaultMapZoom = 18;
+  const defaultMapZoom = 13;
   const defaultMapOptions = {
     zoomControl: true,
     tilt: 0,
