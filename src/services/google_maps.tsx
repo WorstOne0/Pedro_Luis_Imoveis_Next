@@ -8,8 +8,6 @@ const libraries = ["places", "drawing", "geometry"];
 
 // Define a function component called MapProvider that takes a children prop
 export function MapProvider({ children }: { children: ReactNode }) {
-  console.log("Google", process.env.NEXT_PUBLIC_GOOGLE_MAPS_API);
-
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API as string,
     libraries: libraries as Libraries,
