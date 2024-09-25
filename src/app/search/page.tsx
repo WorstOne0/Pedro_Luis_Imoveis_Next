@@ -1,13 +1,22 @@
 "use client";
 
+// Next
 import { MarkerF } from "@react-google-maps/api";
+import { useApiFetch } from "@/hooks";
+// Store
+import { useRealEstateStore } from "@/store";
 // Components
 import { GoogleMaps, RealEstateCard, Searchbar } from "@/components";
 // Styles
 import styles from "./styles.module.css";
 
 export default function Search() {
-  const teste = [1, 2, 3, 4];
+  const { realEstateList, setRealEstateList } = useRealEstateStore((state) => state);
+  const { isLoading } = useApiFetch({ url: "http://localhost:4000/real_estate", method: "post" }, setRealEstateList);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="h-full w-full relative">
@@ -24,7 +33,7 @@ export default function Search() {
         <Searchbar />
 
         <div className="min-h-0 grow px-3 overflow-y-auto">
-          {teste.map((item, index) => (
+          {realEstateList.map((item, index) => (
             <RealEstateCard realEstate={item} key={`real_estate_card_${index}`} />
           ))}
         </div>
