@@ -1,6 +1,7 @@
 "use client";
 
 // Next
+import Image from "next/image";
 import { MarkerF } from "@react-google-maps/api";
 import { useApiFetch } from "@/hooks";
 // Store

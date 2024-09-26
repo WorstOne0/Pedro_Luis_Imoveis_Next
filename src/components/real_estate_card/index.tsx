@@ -2,6 +2,7 @@
 
 // Next
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { RealEstate } from "@/store/real_estate";
 // Components
 import { Card } from "@/components/ui/card";
@@ -12,12 +13,15 @@ import { PiGarage } from "react-icons/pi";
 import { GiExpand } from "react-icons/gi";
 
 export default function RealEstateCard({ realEstate }: { realEstate: RealEstate }) {
+  const router = useRouter();
+
   const [isSelected, setIsSelected] = useState(false);
   const [isFavorited, setIsFavorited] = useState(false);
 
   const handleCardClick = (event: any) => {
     event.stopPropagation();
-    setIsSelected(!isSelected);
+
+    router.push(realEstate._id);
   };
 
   const handleFavoriteClick = (event: any) => {

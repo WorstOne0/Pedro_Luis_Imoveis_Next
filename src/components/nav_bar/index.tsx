@@ -10,7 +10,7 @@ export default function NavBar() {
   const buttons = [
     { value: "/", name: "Home" },
     { value: "/search", name: "Busca" },
-    { value: "/about", name: "Sobre" },
+    { value: "/real_estate", name: "Sobre" },
     { value: "/contact", name: "Contato" },
   ];
 
