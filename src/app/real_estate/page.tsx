@@ -1,19 +1,42 @@
 "use client";
 
 // Next
-import Image from "next/image";
+import { useState } from "react";
 import { MarkerF } from "@react-google-maps/api";
 import { useApiFetch } from "@/hooks";
 // Store
+import { RealEstate } from "@/store/real_estate";
 import { useRealEstateStore } from "@/store";
 // Components
 import { GoogleMaps, RealEstateCard, Searchbar } from "@/components";
 // Styles
-import styles from "./styles.module.css";
+// import styles from "./styles.module.css";
 
-export default function Search() {
+import apartament_icon from "@/../public/apartament_icon.png";
+import house_icon from "@/../public/house_icon.png";
+
+export default function RealEstatePage() {
   const { realEstateList, setRealEstateList } = useRealEstateStore((state) => state);
   const { isLoading } = useApiFetch({ url: "http://localhost:4000/real_estate", method: "post" }, setRealEstateList);
+
+  const [map, setMap] = useState<google.maps.Map | null>(null);
+
+  const createMarkers = (realEstate: RealEstate) => {
+    const icon = {
+      url: resolveTypeIcon(realEstate.type).src,
+      scaledSize: new window.google.maps.Size(46, 46),
+      anchor: new window.google.maps.Point(23, 23),
+    };
+
+    return <MarkerF position={realEstate.address.position} icon={icon} />;
+  };
+
+  const resolveTypeIcon = (type: string) => {
+    if (type === "apartament") return apartament_icon;
+    if (type === "house") return house_icon;
+
+    return apartament_icon;
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -21,21 +44,23 @@ export default function Search() {
 
   return (
     <div className="h-full w-full relative">
-      <GoogleMaps>
-        <MarkerF
-          position={{
-            lat: -24.960731,
-            lng: -53.519697,
-          }}
-        />
-      </GoogleMaps>
+      <GoogleMaps setMap={setMap}>{realEstateList.map((item, index) => createMarkers(item))}</GoogleMaps>
 
       <div className="h-[calc(100%-2rem)] w-[50rem] bg-white rounded-[0.8rem] flex flex-col absolute top-[1rem] left-[1rem]">
         <Searchbar />
 
         <div className="min-h-0 grow px-3 overflow-y-auto">
           {realEstateList.map((item, index) => (
-            <RealEstateCard realEstate={item} key={`real_estate_card_${index}`} />
+            <RealEstateCard
+              key={`real_estate_card_${index}`}
+              realEstate={item}
+              onClickCallback={() =>
+                map?.moveCamera({
+                  center: item.address.position,
+                  zoom: 17,
+                })
+              }
+            />
           ))}
         </div>
       </div>

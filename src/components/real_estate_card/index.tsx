@@ -3,7 +3,9 @@
 // Next
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+// Store
 import { RealEstate } from "@/store/real_estate";
+import { useRealEstateStore } from "@/store";
 // Components
 import { Card } from "@/components/ui/card";
 // Icons
@@ -12,16 +14,20 @@ import { FaLocationDot } from "react-icons/fa6";
 import { PiGarage } from "react-icons/pi";
 import { GiExpand } from "react-icons/gi";
 
-export default function RealEstateCard({ realEstate }: { realEstate: RealEstate }) {
+export default function RealEstateCard({ realEstate, onClickCallback }: { realEstate: RealEstate; onClickCallback?: Function }) {
   const router = useRouter();
 
-  const [isSelected, setIsSelected] = useState(false);
+  const { realEstateSelected, setRealEstateSelected } = useRealEstateStore((state) => state);
   const [isFavorited, setIsFavorited] = useState(false);
 
-  const handleCardClick = (event: any) => {
-    event.stopPropagation();
+  const handleCardClick = () => {
+    if (onClickCallback) onClickCallback();
 
-    router.push(realEstate._id);
+    if (realEstateSelected?._id === realEstate._id) {
+      return router.push(`/real_estate/${realEstate._id}`);
+    }
+
+    setRealEstateSelected(realEstate);
   };
 
   const handleFavoriteClick = (event: any) => {
@@ -33,7 +39,7 @@ export default function RealEstateCard({ realEstate }: { realEstate: RealEstate 
     <Card className="mt-4 rounded-[0.8rem]" onClick={handleCardClick}>
       <div
         className={`pb-3 flex flex-col select-none cursor-pointer rounded-[0.8rem] 
-          ${isSelected ? "border-2 border-blue-600" : "border-2 border-transparent"}
+          ${realEstateSelected?._id === realEstate._id ? "border-2 border-blue-600" : "border-2 border-transparent"}
           `}
       >
         {/* Imagem */}

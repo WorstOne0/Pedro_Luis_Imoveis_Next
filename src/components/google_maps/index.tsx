@@ -1,13 +1,17 @@
 "use client";
 
 // Next
+import { useCallback } from "react";
 import { GoogleMap } from "@react-google-maps/api";
 
-export default function GoogleMaps({ children, height = "100%", width = "100%" }: { children?: React.ReactNode; height?: string; width?: string }) {
-  const defaultMapCenter = {
-    lat: -24.960731,
-    lng: -53.519697,
-  };
+interface GoogleMapsProps {
+  children?: React.ReactNode;
+  setMap?: Function;
+  height?: string;
+  width?: string;
+}
+
+export default function GoogleMaps({ children, setMap = () => {}, height = "100%", width = "100%" }: GoogleMapsProps) {
   const defaultMapZoom = 13;
   const defaultMapOptions = {
     zoomControl: true,
@@ -16,9 +20,23 @@ export default function GoogleMaps({ children, height = "100%", width = "100%" }
     mapTypeId: "hybrid",
   };
 
+  const onLoad = useCallback(
+    (map: google.maps.Map) => {
+      map.moveCamera({
+        center: {
+          lat: -24.960731,
+          lng: -53.519697,
+        },
+      });
+
+      setMap(map);
+    },
+    [setMap]
+  );
+
   return (
     <div className="h-full w-full relative">
-      <GoogleMap mapContainerStyle={{ height, width }} center={defaultMapCenter} zoom={defaultMapZoom} options={defaultMapOptions}>
+      <GoogleMap onLoad={onLoad} mapContainerStyle={{ height, width }} zoom={defaultMapZoom} options={defaultMapOptions}>
         {children}
       </GoogleMap>
 
