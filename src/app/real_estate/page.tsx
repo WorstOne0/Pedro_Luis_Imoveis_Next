@@ -6,9 +6,9 @@ import { MarkerF } from "@react-google-maps/api";
 import { useApiFetch } from "@/hooks";
 // Store
 import { RealEstate } from "@/store/real_estate";
-import { useRealEstateStore } from "@/store";
+import { useRealEstateStore, useSearchBarStore } from "@/store";
 // Components
-import { GoogleMaps, RealEstateCard, Searchbar } from "@/components";
+import { DistrictPolygons, GoogleMaps, RealEstateCard, Searchbar } from "@/components";
 // Styles
 // import styles from "./styles.module.css";
 
@@ -17,10 +17,13 @@ import house_icon from "@/../public/house_icon.png";
 
 export default function RealEstatePage() {
   const { realEstateList, setRealEstateList } = useRealEstateStore((state) => state);
+  const { isSearchOpen } = useSearchBarStore((state) => state);
+
   const { isLoading } = useApiFetch({ url: "http://localhost:4000/real_estate", method: "post" }, setRealEstateList);
 
   const [map, setMap] = useState<google.maps.Map | null>(null);
 
+  //
   const createMarkers = (realEstate: RealEstate) => {
     const icon = {
       url: resolveTypeIcon(realEstate.type).src,
@@ -38,13 +41,17 @@ export default function RealEstatePage() {
     return apartament_icon;
   };
 
+  //
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
   return (
     <div className="h-full w-full relative">
-      <GoogleMaps setMap={setMap}>{realEstateList.map((item, index) => createMarkers(item))}</GoogleMaps>
+      <GoogleMaps setMap={setMap}>
+        {realEstateList.map((item, index) => createMarkers(item))}
+        {isSearchOpen ? <DistrictPolygons map={map} /> : null}
+      </GoogleMaps>
 
       <div className="h-[calc(100%-2rem)] w-[50rem] bg-white rounded-[0.8rem] flex flex-col absolute top-[1rem] left-[1rem]">
         <Searchbar />

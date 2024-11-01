@@ -1,18 +1,19 @@
 "use client";
 
 // Next
-import { useState } from "react";
 import { motion } from "framer-motion";
+// Store
+import { useDistrictStore, useSearchBarStore } from "@/store";
 // Components
 import { Card } from "@/components/ui/card";
 // Icons
 import { FaFilter } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
 
 export default function Searchbar() {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const { isSearchOpen, setIsSearchOpen } = useSearchBarStore((state) => state);
+  const { districtSelected } = useDistrictStore((state) => state);
 
-  if (!isExpanded) {
+  if (!isSearchOpen) {
     return (
       <div className="min-h-[5rem] px-3 mt-3">
         <Card className="h-full w-full flex rounded-[0.8rem] bg-blue-100">
@@ -22,7 +23,7 @@ export default function Searchbar() {
               <span className="italic ml-1">Imóveis</span>
             </div>
           </div>
-          <div className="px-5 flex items-center" onClick={() => setIsExpanded(true)}>
+          <div className="px-5 flex items-center" onClick={() => setIsSearchOpen(true)}>
             {/* <MdDelete className="mr-[1rem]" size={20} color="red" /> */}
             <FaFilter size={16} />
           </div>
@@ -31,7 +32,7 @@ export default function Searchbar() {
     );
   }
 
-  if (isExpanded) {
+  if (isSearchOpen) {
     return (
       <motion.div
         initial={{ height: 0 }}
@@ -43,7 +44,8 @@ export default function Searchbar() {
           <span>50</span>
           <span>Imóveis</span>
         </div>
-        <div onClick={() => setIsExpanded(false)}>Filtro</div>
+        <div onClick={() => setIsSearchOpen(false)}>Filtro</div>
+        <span>{districtSelected.name}</span>
       </motion.div>
     );
   }
