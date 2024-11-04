@@ -1,4 +1,5 @@
 // Next
+import { useState } from "react";
 import { PolygonF } from "@react-google-maps/api";
 // Store
 import { useDistrictStore } from "@/store";
@@ -7,6 +8,7 @@ import districtsGeo from "@/utils/districts_geo";
 
 export default function DistrictPolygons({ map }: { map: google.maps.Map | null }) {
   const { districtSelected, setDistrictSelected } = useDistrictStore((state) => state);
+  const [polygonHovered, setPolygonHovered] = useState("");
 
   const createPolygons = (item: { name: string; color: string; geometry: any }) => {
     const path: any = item.geometry.coordinates.map((item: any, index: any) => ({ lat: item[1], lng: item[0] }));
@@ -16,7 +18,16 @@ export default function DistrictPolygons({ map }: { map: google.maps.Map | null 
         key={item.name}
         paths={path}
         onClick={() => handleClick(item)}
-        options={{ fillColor: item.color, fillOpacity: 0.18, strokeColor: item.color, strokeOpacity: 0.8, strokeWeight: 3 }}
+        onMouseOver={() => setPolygonHovered(item.name)}
+        onMouseOut={() => setPolygonHovered("")}
+        options={{
+          fillColor: polygonHovered === item.name ? "#FF0000" : "#0000FF",
+          fillOpacity: 0.18,
+          strokeColor: polygonHovered === item.name ? "#FF0000" : "#0000FF",
+          strokeOpacity: 0.8,
+          strokeWeight: 3,
+          zIndex: polygonHovered === item.name ? 10 : 2,
+        }}
       />
     );
   };
