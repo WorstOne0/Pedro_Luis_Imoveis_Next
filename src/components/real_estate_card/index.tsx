@@ -36,57 +36,51 @@ export default function RealEstateCard({ realEstate, onClickCallback }: { realEs
   };
 
   return (
-    <Card className="mt-4 rounded-[0.8rem]" onClick={handleCardClick}>
+    <Card className=" pb-3 flex flex-col select-none cursor-pointer rounded-[0.8rem] mt-4 " onClick={handleCardClick}>
+      {/* Imagem */}
       <div
-        className={`pb-3 flex flex-col select-none cursor-pointer rounded-[0.8rem] 
-          ${realEstateSelected?._id === realEstate._id ? "border-2 border-blue-600" : "border-2 border-transparent"}
-          `}
+        className={`h-[19rem] w-full rounded-t-[0.8rem] bg-cover bg-no-repeat bg-center relative`}
+        style={{ backgroundImage: `url(${realEstate.thumbnail})` }}
       >
-        {/* Imagem */}
-        <div
-          className={`h-[19rem] w-full rounded-t-[0.8rem] bg-cover bg-no-repeat bg-center relative`}
-          style={{ backgroundImage: `url(${realEstate.thumbnail})` }}
-        >
-          <div className="absolute bottom-4 right-4" onClick={handleFavoriteClick}>
-            {isFavorited ? <FaBookmark color="blue" /> : <FaRegBookmark color="blue" />}
+        <div className="absolute bottom-4 right-4" onClick={handleFavoriteClick}>
+          {isFavorited ? <FaBookmark color="blue" /> : <FaRegBookmark color="blue" />}
+        </div>
+      </div>
+      <div className="grow px-5 pt-3 pb-2">
+        {/* Title */}
+        <div className="flex justify-between items-center">
+          <span className="text-[2.6rem] font-extrabold">R$ {realEstate.price.toLocaleString()}</span>
+          <span className="text-[1.4rem] italic text-gray-600">{realEstate.type}</span>
+        </div>
+        {/* Body */}
+        <div className="flex justify-between text-[1.6rem]">
+          <div className="flex items-center">
+            <FaBed size={16} color="text-foreground" className="mr-2" />
+            <span className="font-bold text-[1.6rem] mr-1 ">{realEstate.rooms}</span>
+            <span className="">quartos</span>
+          </div>
+          <div className="flex items-center">
+            <FaBath size={16} color="text-foreground" className="mr-2" />
+            <span className="font-bold text-[1.6rem] mr-1">{realEstate.bathrooms}</span>
+            <span className="">banheiros</span>
+          </div>
+          <div className="flex items-center">
+            <PiGarage size={16} color="text-foreground" className="mr-2" />
+            <span className="font-bold text-[1.6rem] mr-1">{realEstate.garages}</span>
+            <span>garagem</span>
+          </div>
+          <div className="flex items-center">
+            <GiExpand size={16} color="text-foreground" className="mr-2" />
+            <span className="font-bold text-[1.6rem] mr-1">{realEstate.area}</span>
+            <span>
+              m<sup>2</sup>
+            </span>
           </div>
         </div>
-        <div className="grow px-5 pt-3 pb-2">
-          {/* Title */}
-          <div className="flex justify-between items-center">
-            <span className="text-[2.6rem] font-extrabold">R$ {realEstate.price.toLocaleString()}</span>
-            <span className="text-[1.4rem] italic text-gray-600">{realEstate.type}</span>
-          </div>
-          {/* Body */}
-          <div className="flex justify-between text-[1.6rem]">
-            <div className="flex items-center">
-              <FaBed size={16} color="black" className="mr-2" />
-              <span className="font-bold text-[1.6rem] mr-1">{realEstate.rooms}</span>
-              <span className="">quartos</span>
-            </div>
-            <div className="flex items-center">
-              <FaBath size={16} color="black" className="mr-2" />
-              <span className="font-bold text-[1.6rem] mr-1">{realEstate.bathrooms}</span>
-              <span className="">banheiros</span>
-            </div>
-            <div className="flex items-center">
-              <PiGarage size={16} color="black" className="mr-2" />
-              <span className="font-bold text-[1.6rem] mr-1">{realEstate.garages}</span>
-              <span>garagem</span>
-            </div>
-            <div className="flex items-center">
-              <GiExpand size={16} color="black" className="mr-2" />
-              <span className="font-bold text-[1.6rem] mr-1">{realEstate.area}</span>
-              <span>
-                m<sup>2</sup>
-              </span>
-            </div>
-          </div>
-          {/* Footer */}
-          <div className="flex items-center select-text mt-4">
-            <FaLocationDot size={14} color="red" className="mr-2" />
-            <span className="text-[1.4rem] italic text-gray-600 leading-6">Rua Travessa Pio XII, 34, Cancelli, Cascavel, PR</span>
-          </div>
+        {/* Footer */}
+        <div className="flex items-center select-text mt-4">
+          <FaLocationDot size={14} color="red" className="mr-2" />
+          <span className="text-[1.4rem] italic leading-6">Rua Travessa Pio XII, 34, Cancelli, Cascavel, PR</span>
         </div>
       </div>
     </Card>

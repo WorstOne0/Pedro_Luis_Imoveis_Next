@@ -3,23 +3,29 @@
 // Next
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { useTheme } from "next-themes";
+// Icons
+import { MdOutlineDarkMode } from "react-icons/md";
+import { FaRegBookmark } from "react-icons/fa";
 
 export default function NavBar() {
   const pathname = usePathname();
+  const { theme, setTheme } = useTheme();
 
   const buttons = [
     { value: "/", name: "Home" },
-    { value: "/real_estate", name: "Busca" },
     { value: "/about", name: "Sobre" },
     { value: "/contact", name: "Contato" },
   ];
 
   const createButton = ({ route, index }: { route: any; index: number }) => {
     return (
-      <div key={`nav_button_${index}`} className="mr-[8rem] last:mr-0 font-medium">
+      <div key={`nav_button_${index}`} className="mr-[4rem] last:mr-0">
         <Link
           href={route.value}
-          className={`px-3 border-b-2 ${pathname === route.value ? "border-blue-600" : "border-transparent"} cursor-pointer select-none`}
+          className={`px-3 cursor-pointer select-none font-bold ${
+            pathname === route.value ? "text-primary dark:text-white " : "text-gray-500 dark:text-gray-400"
+          }`}
         >
           {route.name}
         </Link>
@@ -28,10 +34,20 @@ export default function NavBar() {
   };
 
   return (
-    <nav className="h-[7rem] w-full bg-white flex justify-center items-center">
+    <nav className="h-[6.2rem] w-full bg-background flex justify-center items-center px-[4rem]">
+      {/* Logo */}
       <div className="h-full w-[20rem] bg-red-500"></div>
-      <div className="min-w-0 grow flex justify-center">{buttons.map((route, index) => createButton({ route, index }))}</div>
-      <div className="h-full w-[20rem] bg-red-500"></div>
+
+      <div className="h-full min-w-0 grow flex items-center justify-end px-[5rem]">
+        {/* Links */}
+        <div className="flex items-center mr-[5rem]">{buttons.map((route, index) => createButton({ route, index }))}</div>
+        <div className="h-[4rem] border-l-2 border-grey-300 mr-[5rem]"></div>
+        {/* Buttons */}
+        <div className="h-full flex items-center">
+          <MdOutlineDarkMode className="mr-[2rem]" size={26} onClick={() => setTheme(theme === "dark" ? "light" : "dark")} />
+          <FaRegBookmark size={20} />
+        </div>
+      </div>
     </nav>
   );
 }

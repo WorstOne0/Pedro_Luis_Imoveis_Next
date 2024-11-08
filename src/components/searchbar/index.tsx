@@ -5,9 +5,10 @@ import { motion } from "framer-motion";
 // Store
 import { useDistrictStore, useSearchBarStore } from "@/store";
 // Components
-import { Card } from "@/components/ui/card";
+import { Card, Input } from "@/components";
 // Icons
 import { FaFilter } from "react-icons/fa";
+import { MdOutlineSort } from "react-icons/md";
 
 export default function Searchbar() {
   const { isSearchOpen, setIsSearchOpen } = useSearchBarStore((state) => state);
@@ -15,19 +16,24 @@ export default function Searchbar() {
 
   if (!isSearchOpen) {
     return (
-      <div className="min-h-[5rem] px-3 mt-3">
-        <Card className="h-full w-full flex rounded-[0.8rem] bg-blue-100">
-          <div className="min-w-0 grow flex items-center px-4">
-            <div className="flex items-end">
+      <div className="px-3 mt-[1.5rem] mb-[0.5rem]">
+        <div className="h-full w-full flex flex-col rounded-[0.8rem] ">
+          <div className="flex justify-between items-end px-[0.5rem]">
+            <div>
               <span className="text-[3rem] font-bold leading-[3rem]">50</span>
               <span className="italic ml-1">Imóveis</span>
             </div>
+            <div className="flex">
+              <Card className="py-2 px-[1.2rem] flex items-center mr-3">
+                <MdOutlineSort size={20} />
+              </Card>
+              <Card className="py-2 px-[1.8rem] flex items-center" onClick={() => setIsSearchOpen(true)}>
+                <FaFilter size={13} />
+                <span className="ml-3 font-bold text-[1.6rem]">Filtros</span>
+              </Card>
+            </div>
           </div>
-          <div className="px-5 flex items-center" onClick={() => setIsSearchOpen(true)}>
-            {/* <MdDelete className="mr-[1rem]" size={20} color="red" /> */}
-            <FaFilter size={16} />
-          </div>
-        </Card>
+        </div>
       </div>
     );
   }
@@ -38,14 +44,29 @@ export default function Searchbar() {
         initial={{ height: 0 }}
         animate={{ height: "100%" }}
         transition={{ duration: 0.4 }}
-        className="w-full bg-red-500 flex absolute top-0 left-0 z-10"
+        className="h-full w-full p-[1rem] bg-background flex flex-col items-start absolute top-0 left-0 z-10"
       >
-        <div>
-          <span>50</span>
-          <span>Imóveis</span>
+        {/* Title */}
+        <div className="flex justify-between items-center">
+          <div className="flex">
+            <FaFilter size={13} />
+            <span className="ml-3 font-bold text-[1.6rem]">Filtros</span>
+          </div>
+
+          <div onClick={() => setIsSearchOpen(false)}>Fechar</div>
         </div>
-        <div onClick={() => setIsSearchOpen(false)}>Filtro</div>
-        <span>{districtSelected.name}</span>
+
+        {/*  */}
+        <Card className="h-[20rem] w-full my-3 flex flex-col justify-between items-center p-[0.8rem]">
+          <span className="mb-2">Tipo de Imóvel</span>
+          <div className="w-full grow grid grid-cols-3 grid-rows-2 grid-flow-col gap-4">
+            <Card>a</Card>
+            <Card>a</Card>
+            <Card>a</Card>
+            <Card>a</Card>
+            <Card>a</Card>
+          </div>
+        </Card>
       </motion.div>
     );
   }
