@@ -34,7 +34,7 @@ export default function NavBar() {
   };
 
   return (
-    <nav className="min-h-[6.2rem] w-full bg-background flex justify-center items-center px-[4rem]">
+    <nav className="min-h-[6.2rem] w-full bg-background flex justify-center items-center px-[4rem] border-b-2 border-gray-200">
       {/* Logo */}
       <div className="h-full w-[20rem] bg-red-500"></div>
 
