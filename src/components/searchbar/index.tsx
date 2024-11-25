@@ -7,13 +7,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useDistrictStore, useSearchBarStore } from "@/store";
 // Components
 import { ApartamentSVG, Card, CardTitle, HouseSVG, LandSVG, ShopSVG, SobradoSVG } from "@/components";
+import PriceCard from "./components/price_card";
 // Icons
 import { FaFilter, FaPlus, FaMinus } from "react-icons/fa";
 import { MdOutlineSort, MdOutlineClose, MdDelete } from "react-icons/md";
 
 type Filter = {
   propertyType: string[];
-  price: number;
+  price: { min: number; max: number };
   rooms: number;
   bathrooms: number;
   garages: number;
@@ -25,12 +26,14 @@ export default function Searchbar({ children }: { children?: React.ReactNode }) 
   const { districtSelected } = useDistrictStore((state) => state);
   const [filter, setFilter] = useState<Filter>({
     propertyType: ["apartament", "house", "land", "shop", "sobrado"],
-    price: 0,
+    price: { min: 0, max: 0 },
     rooms: 0,
     bathrooms: 0,
     garages: 0,
     area: 50,
   });
+
+  const onPriceChange = (value: number[]) => setFilter((prev) => ({ ...prev, price: { min: value[0], max: value[1] } }));
 
   const buildPropertyCard = (type: string, title: string) => {
     let propertySvg = <div></div>;
@@ -203,14 +206,7 @@ export default function Searchbar({ children }: { children?: React.ReactNode }) 
             </Card>
 
             <Card className="min-h-[25rem] w-full my-3 flex flex-col justify-between items-center p-[0.8rem]">
-              <CardTitle className="font-bold text-[2.2rem] mb-[0.8rem]">Preço</CardTitle>
-              <div className="w-full grow grid grid-cols-3 grid-rows-2 grid-flow-col gap-4">
-                {buildPropertyCard("apartament", "Apartamento")}
-                {buildPropertyCard("house", "Casa")}
-                {buildPropertyCard("land", "Terreno")}
-                {buildPropertyCard("shop", "Comercial")}
-                {buildPropertyCard("sobrado", "Sobrado")}
-              </div>
+              <PriceCard price={filter.price} onPriceChange={onPriceChange} />
             </Card>
 
             <Card className="min-h-[22rem] w-full my-3 flex flex-col justify-between items-center p-[0.8rem]">

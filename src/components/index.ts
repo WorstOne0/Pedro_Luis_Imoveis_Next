@@ -14,6 +14,8 @@ import SobradoSVG from "./svgs/sobrado";
 // Shadcn
 import { Card, CardHeader, CardContent, CardFooter, CardTitle, CardDescription } from "./ui/card";
 import { Input } from "./ui/input";
+import { Slider } from "./ui/slider";
+import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent, ChartStyle } from "./ui/chart";
 
 // Export Components
 export {
@@ -36,4 +38,11 @@ export {
   CardTitle,
   CardDescription,
   Input,
+  Slider,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+  ChartLegend,
+  ChartLegendContent,
+  ChartStyle,
 };
