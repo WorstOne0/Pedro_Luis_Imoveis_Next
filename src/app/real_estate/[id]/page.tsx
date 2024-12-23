@@ -9,7 +9,11 @@ import { useRealEstateStore } from "@/store";
 // Components
 import { Card } from "@/components";
 // Icons
-import { FaWhatsapp, FaArrowLeft } from "react-icons/fa";
+import { FaWhatsapp, FaArrowLeft, FaBed, FaBath } from "react-icons/fa";
+import { MdDescription } from "react-icons/md";
+import { FaLocationDot } from "react-icons/fa6";
+import { PiGarage } from "react-icons/pi";
+import { GiExpand } from "react-icons/gi";
 
 export default function RealEstatePage({ params }: { params: { id: string } }) {
   const { realEstateSelected, setRealEstateSelected } = useRealEstateStore((state) => state);
@@ -62,16 +66,96 @@ export default function RealEstatePage({ params }: { params: { id: string } }) {
       </div>
 
       {/* Body */}
-      <div className="min-h-[100rem] flex mt-[1.5rem] ">
+      <div className="min-h-[100rem] h-[100rem] flex mt-[1.5rem] ">
         {/* Left */}
-        <div className="h-full min-w-0 grow bg-red-100"></div>
+        <div className="h-full min-w-0 grow px-[1.5rem]">
+          <div className="w-full flex justify-between items-center">
+            <div className="flex items-center">
+              <MdDescription size={24} className="mr-2" />
+              <span className="font-bold text-[2.6rem]">Descrição</span>
+            </div>
+            <div className="text-gray-500 text-[1.6rem] italic"></div>
+          </div>
+          <p className="mt-[1.5rem] text-justify text-gray-800">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec lectus eros. Integer suscipit tortor et tempus congue. Nunc vitae elit
+            vitae nisi convallis tristique id vitae est. Aliquam non libero accumsan, elementum nisl eu, eleifend purus. Aliquam a velit lacus. Lorem
+            ipsum dolor sit amet, consectetur adipiscing elit. Integer vehicula ut justo quis convallis. Cras ultricies ultricies dictum. In sed
+            interdum arcu. Ut vitae urna orci. Sed sed finibus nibh. Integer sit amet libero eu velit convallis dictum. In hac habitasse platea
+            dictumst. Nullam euismod ultricies metus. Morbi tincidunt lacinia massa, ut egestas velit cursus ac. Sed varius massa ut ex lobortis
+            consectetur. Aliquam vel lectus sed dolor pharetra faucibus. Sed blandit ornare ante, id convallis nisl vehicula a. Sed a porta eros. Ut
+            tempor elit felis, nec dictum enim auctor vestibulum. Aliquam lacus dui, auctor vel dictum quis, consectetur non urna. Sed cursus, felis
+            sed volutpat rutrum, elit nunc dapibus elit, eu mattis nunc velit sit amet nunc. Nunc nec lacus at nulla ultrices imperdiet id nec tortor.
+            Ut ac tempus tellus.
+          </p>
+
+          <div className="mt-[3rem] w-full flex justify-between items-center">
+            <div className="flex items-center">
+              <FaLocationDot size={24} className="mr-2" />
+              <span className="font-bold text-[2.6rem]">Endereço</span>
+            </div>
+            <div className="text-gray-500 text-[1.6rem] italic">Rua Travessa Pio XII, 34, Cancelli, Cascavel, PR</div>
+          </div>
+
+          <div className="w-full grid grid-cols-2 gap-[1.5rem] mt-[1.5rem]">
+            <Card className="flex justify-between items-center px-[1.5rem] py-[0.5rem]">
+              <span className="font-bold">Cidade</span>
+              <span className="italic">Cascavel</span>
+            </Card>
+            <Card className="flex justify-between items-center px-[1.5rem] py-[0.5rem]">
+              <span className="font-bold">Estado</span>
+              <span className="italic">Paraná</span>
+            </Card>
+            <Card className="flex justify-between items-center px-[1.5rem] py-[0.5rem]">
+              <span className="font-bold">CEP</span>
+              <span className="italic">85811-310</span>
+            </Card>
+            <Card className="flex justify-between items-center px-[1.5rem] py-[0.5rem]">
+              <span className="font-bold">Bairro</span>
+              <span className="italic">Cancelli</span>
+            </Card>
+            <Card className="flex justify-between items-center px-[1.5rem] py-[0.5rem]">
+              <span className="font-bold">Rua</span>
+              <span className="italic">Travessa Pio XII</span>
+            </Card>
+            <Card className="flex justify-between items-center px-[1.5rem] py-[0.5rem]">
+              <span className="font-bold">Número / Comp.</span>
+              <span className="italic">34, Esquina</span>
+            </Card>
+          </div>
+        </div>
 
         {/* Right */}
         <div className="h-full min-w-[50rem] ml-[1.5rem]">
           <Card className="h-[30rem] w-full flex flex-col p-[1.5rem]">
-            <div className="min-h-0 grow"></div>
+            <div className="min-h-0 grow flex flex-col">
+              <span className="font-bold text-[2.2rem]">Informações</span>
 
-            <div className="h-[5rem] w-full flex px-[1.5rem]">
+              <div className="min-h-0 grow flex flex-col justify-center items-center">
+                <span className="text-[1.4rem]">Preço</span>
+                <span className="text-[2.6rem] font-extrabold">R$ {"40000".toLocaleString()}</span>
+              </div>
+
+              <Card className="flex justify-center py-[0.5rem]">
+                <div className="flex items-center px-[1rem]">
+                  <FaBed size={16} color="text-foreground" className="mr-2" />
+                  <span>2</span>
+                </div>
+                <div className="flex items-center px-[1rem]">
+                  <FaBath size={16} color="text-foreground" className="mr-2" />
+                  <span>2</span>
+                </div>
+                <div className="flex items-center px-[1rem]">
+                  <PiGarage size={16} color="text-foreground" className="mr-2" />
+                  <span>2</span>
+                </div>
+                <div className="flex items-center px-[1rem]">
+                  <GiExpand size={16} color="text-foreground" className="mr-2" />
+                  <span>2</span>
+                </div>
+              </Card>
+            </div>
+
+            <div className="h-[5rem] w-full flex mt-[1.5rem]">
               <Card className="min-w-0 grow flex justify-center items-center dark:bg-secondary rounded-[0.8rem]">
                 <FaWhatsapp size={20} />
                 <span className="font-bold text-[1.6rem] ml-[1rem]">Contato</span>
