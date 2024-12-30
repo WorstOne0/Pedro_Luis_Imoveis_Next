@@ -16,7 +16,7 @@ import apartament_icon from "@/../public/apartament_icon.png";
 import house_icon from "@/../public/house_icon.png";
 
 export default function Home() {
-  const { realEstateList, setRealEstateList } = useRealEstateStore((state) => state);
+  const { realEstateList, setRealEstateList, setRealEstateSelected } = useRealEstateStore((state) => state);
   const { isSearchOpen } = useSearchBarStore((state) => state);
 
   const { isLoading } = useApiFetch({ url: "http://localhost:4000/real_estate", method: "post" }, setRealEstateList);
@@ -31,7 +31,7 @@ export default function Home() {
       anchor: new window.google.maps.Point(23, 23),
     };
 
-    return <MarkerF position={realEstate.address.position} icon={icon} />;
+    return <MarkerF position={realEstate.address.position} icon={icon} clickable={true} onClick={() => setRealEstateSelected(realEstate)} />;
   };
 
   const resolveTypeIcon = (type: string) => {

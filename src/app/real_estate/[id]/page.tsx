@@ -7,18 +7,22 @@ import { useApiFetch } from "@/hooks";
 // Store
 import { useRealEstateStore } from "@/store";
 // Components
-import { Card } from "@/components";
+import { Card, Slideshow } from "@/components";
+import { SlideshowHandle } from "@/components/slideshow";
 // Icons
 import { FaWhatsapp, FaArrowLeft, FaBed, FaBath } from "react-icons/fa";
 import { MdDescription } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
 import { PiGarage } from "react-icons/pi";
 import { GiExpand } from "react-icons/gi";
+import { useRef } from "react";
 
 export default function RealEstatePage({ params }: { params: { id: string } }) {
   const { realEstateSelected, setRealEstateSelected } = useRealEstateStore((state) => state);
 
   const { isLoading } = useApiFetch({ url: `http://localhost:4000/real_estate/${params.id}`, method: "post" }, setRealEstateSelected);
+
+  const slideshowRef = useRef<SlideshowHandle>(null);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -26,11 +30,15 @@ export default function RealEstatePage({ params }: { params: { id: string } }) {
 
   return (
     <div className="max-h-full w-full p-[1.5rem] flex flex-col overflow-y-auto">
+      {/* Slideshow */}
+      <Slideshow ref={slideshowRef} />
+
       {/* Image */}
       <div className={`min-h-[50vh] w-full flex justify-between`}>
         <div
           className={`min-h-[50vh] w-[85%] rounded-[0.8rem] bg-cover bg-no-repeat bg-center relative`}
           style={{ backgroundImage: `url(${realEstateSelected?.thumbnail})` }}
+          onClick={() => slideshowRef.current?.openSlideshow()}
         >
           <Link
             href={"/"}
@@ -43,17 +51,20 @@ export default function RealEstatePage({ params }: { params: { id: string } }) {
           <div
             className={`h-[32%] w-[100%] rounded-[0.8rem] bg-cover bg-no-repeat bg-center`}
             style={{ backgroundImage: `url(${realEstateSelected?.thumbnail})` }}
+            onClick={() => slideshowRef.current?.openSlideshow()}
           ></div>
           <div
             className={`h-[32%] w-[100%] rounded-[0.8rem] bg-cover bg-no-repeat bg-center`}
             style={{ backgroundImage: `url(${realEstateSelected?.thumbnail})` }}
+            onClick={() => slideshowRef.current?.openSlideshow()}
           ></div>
           <div className={`h-[32%] w-[100%] rounded-[0.8rem] overflow-hidden relative`}>
             <div
               className={`h-[100%] w-[100%] rounded-[0.8rem] bg-cover bg-no-repeat bg-center`}
               style={{ backgroundImage: `url(${realEstateSelected?.thumbnail})`, filter: "blur(8px)" }}
+              onClick={() => slideshowRef.current?.openSlideshow()}
             ></div>
-            <div className="flex flex-col absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+            <div className="flex flex-col absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] select-none">
               <span className="text-[2.2rem] font-bold text-center text-white" style={{ textShadow: "0 0 4px #000" }}>
                 +16
               </span>
@@ -128,11 +139,14 @@ export default function RealEstatePage({ params }: { params: { id: string } }) {
         <div className="h-full min-w-[50rem] ml-[1.5rem]">
           <Card className="h-[30rem] w-full flex flex-col p-[1.5rem]">
             <div className="min-h-0 grow flex flex-col">
-              <span className="font-bold text-[2.2rem]">Informações</span>
+              <div className="flex justify-between">
+                <span className="font-bold text-[2.2rem]">Informações</span>
+                <span className="text-gray-500 text-[1.4rem] italic">Criado as 12/12/2024</span>
+              </div>
 
               <div className="min-h-0 grow flex flex-col justify-center items-center">
-                <span className="text-[1.4rem]">Preço</span>
-                <span className="text-[2.6rem] font-extrabold">R$ {"40000".toLocaleString()}</span>
+                <span className="text-[1.6rem]">Preço</span>
+                <span className="text-[3.6rem] font-extrabold tracking-widest">R$ {realEstateSelected?.price.toLocaleString()}</span>
               </div>
 
               <Card className="flex justify-center py-[0.5rem]">

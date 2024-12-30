@@ -13,12 +13,15 @@ import { FaBed, FaBath, FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { PiGarage } from "react-icons/pi";
 import { GiExpand } from "react-icons/gi";
+import { MdVerified } from "react-icons/md";
 
 export default function RealEstateCard({ realEstate, onClickCallback }: { realEstate: RealEstate; onClickCallback?: Function }) {
   const router = useRouter();
 
   const { realEstateSelected, setRealEstateSelected } = useRealEstateStore((state) => state);
   const [isFavorited, setIsFavorited] = useState(false);
+
+  const isSelected = realEstateSelected?._id === realEstate._id;
 
   const handleCardClick = () => {
     if (onClickCallback) onClickCallback();
@@ -36,17 +39,27 @@ export default function RealEstateCard({ realEstate, onClickCallback }: { realEs
   };
 
   return (
-    <Card className=" pb-3 flex flex-col select-none cursor-pointer rounded-[0.8rem] mt-4 " onClick={handleCardClick}>
+    <Card className={`pb-3 flex flex-col select-none cursor-pointer rounded-[0.8rem] mt-4 relative`} onClick={handleCardClick}>
+      {/* Selected */}
+      {isSelected && (
+        <div
+          className="absolute top-0 left-0 h-[4rem] w-[4rem] bg-primary z-10"
+          style={{ clipPath: "polygon(0 0,100% 0,0 100%)", borderTopLeftRadius: "0.8rem" }}
+        >
+          <MdVerified size={18} color="white" className="ml-1 mt-1" />
+        </div>
+      )}
+
       {/* Imagem */}
       <div
-        className={`h-[19rem] w-full rounded-t-[0.8rem] bg-cover bg-no-repeat bg-center relative`}
+        className={`h-[19rem] w-full rounded-[0.8rem] bg-cover bg-no-repeat bg-center relative`}
         style={{ backgroundImage: `url(${realEstate.thumbnail})` }}
       >
         <div className="absolute bottom-4 right-4" onClick={handleFavoriteClick}>
           {isFavorited ? <FaBookmark color="blue" /> : <FaRegBookmark color="blue" />}
         </div>
       </div>
-      <div className="grow px-5 pt-3 pb-2">
+      <div className="grow px-5 pt-3 pb-2 bg-white">
         {/* Title */}
         <div className="flex justify-between items-center">
           <span className="text-[2.6rem] font-extrabold">R$ {realEstate.price.toLocaleString()}</span>

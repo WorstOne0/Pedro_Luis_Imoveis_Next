@@ -1,6 +1,8 @@
 // Global
 import NavBar from "./nav_bar";
 import GoogleMaps from "./google_maps";
+import Modal from "./modal";
+import Slideshow from "./slideshow";
 //
 import RealEstateCard from "./real_estate_card";
 import Searchbar from "./searchbar";
@@ -21,6 +23,8 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLe
 export {
   NavBar,
   GoogleMaps,
+  Modal,
+  Slideshow,
   RealEstateCard,
   Searchbar,
   DistrictPolygons,
