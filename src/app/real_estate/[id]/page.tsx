@@ -31,14 +31,46 @@ export default function RealEstatePage({ params }: { params: { id: string } }) {
   return (
     <div className="max-h-full w-full p-[1.5rem] flex flex-col overflow-y-auto">
       {/* Slideshow */}
-      <Slideshow ref={slideshowRef} />
+      <Slideshow
+        ref={slideshowRef}
+        images={[
+          "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg",
+          "https://plus.unsplash.com/premium_photo-1689609950112-d66095626efb?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8aG91c2V8ZW58MHx8MHx8fDA%3D",
+          "https://static.vecteezy.com/system/resources/thumbnails/023/308/330/small_2x/ai-generative-exterior-of-modern-luxury-house-with-garden-and-beautiful-sky-photo.jpg",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
+        ]}
+      />
 
       {/* Image */}
       <div className={`min-h-[50vh] w-full flex justify-between`}>
         <div
-          className={`min-h-[50vh] w-[85%] rounded-[0.8rem] bg-cover bg-no-repeat bg-center relative`}
+          className={`min-h-[50vh] w-[85%] rounded-[0.8rem] bg-cover bg-no-repeat bg-center relative cursor-pointer`}
           style={{ backgroundImage: `url(${realEstateSelected?.thumbnail})` }}
-          onClick={() => slideshowRef.current?.openSlideshow()}
+          onClick={() => slideshowRef.current?.openSlideshow(0)}
         >
           <Link
             href={"/"}
@@ -49,20 +81,24 @@ export default function RealEstatePage({ params }: { params: { id: string } }) {
         </div>
         <div className={`min-h-[50vh] w-[15%] rounded-[0.8rem] flex flex-col justify-between ml-[1.5rem]`}>
           <div
-            className={`h-[32%] w-[100%] rounded-[0.8rem] bg-cover bg-no-repeat bg-center`}
-            style={{ backgroundImage: `url(${realEstateSelected?.thumbnail})` }}
-            onClick={() => slideshowRef.current?.openSlideshow()}
+            className={`h-[32%] w-[100%] rounded-[0.8rem] bg-cover bg-no-repeat bg-center cursor-pointer`}
+            style={{
+              backgroundImage: `url("https://plus.unsplash.com/premium_photo-1689609950112-d66095626efb?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8aG91c2V8ZW58MHx8MHx8fDA%3D")`,
+            }}
+            onClick={() => slideshowRef.current?.openSlideshow(1)}
           ></div>
           <div
-            className={`h-[32%] w-[100%] rounded-[0.8rem] bg-cover bg-no-repeat bg-center`}
-            style={{ backgroundImage: `url(${realEstateSelected?.thumbnail})` }}
-            onClick={() => slideshowRef.current?.openSlideshow()}
+            className={`h-[32%] w-[100%] rounded-[0.8rem] bg-cover bg-no-repeat bg-center cursor-pointer`}
+            style={{
+              backgroundImage: `url("https://static.vecteezy.com/system/resources/thumbnails/023/308/330/small_2x/ai-generative-exterior-of-modern-luxury-house-with-garden-and-beautiful-sky-photo.jpg")`,
+            }}
+            onClick={() => slideshowRef.current?.openSlideshow(2)}
           ></div>
           <div className={`h-[32%] w-[100%] rounded-[0.8rem] overflow-hidden relative`}>
             <div
-              className={`h-[100%] w-[100%] rounded-[0.8rem] bg-cover bg-no-repeat bg-center`}
+              className={`h-[100%] w-[100%] rounded-[0.8rem] bg-cover bg-no-repeat bg-center cursor-pointer`}
               style={{ backgroundImage: `url(${realEstateSelected?.thumbnail})`, filter: "blur(8px)" }}
-              onClick={() => slideshowRef.current?.openSlideshow()}
+              onClick={() => slideshowRef.current?.openSlideshow(0)}
             ></div>
             <div className="flex flex-col absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] select-none">
               <span className="text-[2.2rem] font-bold text-center text-white" style={{ textShadow: "0 0 4px #000" }}>
