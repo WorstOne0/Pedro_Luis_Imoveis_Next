@@ -56,7 +56,7 @@ export default function RealEstateCard({ realEstate, onClickCallback }: { realEs
         style={{ backgroundImage: `url(${realEstate.thumbnail})` }}
       >
         <div className="absolute bottom-4 right-4" onClick={handleFavoriteClick}>
-          {isFavorited ? <FaBookmark color="blue" /> : <FaRegBookmark color="blue" />}
+          {isFavorited ? <FaBookmark color="red" /> : <FaRegBookmark color="red" />}
         </div>
       </div>
       <div className="grow px-5 pt-3 pb-2 bg-white">

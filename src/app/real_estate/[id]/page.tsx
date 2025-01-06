@@ -11,7 +11,7 @@ import { Card, Slideshow } from "@/components";
 import { SlideshowHandle } from "@/components/slideshow";
 // Icons
 import { FaWhatsapp, FaArrowLeft, FaBed, FaBath } from "react-icons/fa";
-import { MdDescription } from "react-icons/md";
+import { MdDescription, MdShare } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
 import { PiGarage } from "react-icons/pi";
 import { GiExpand } from "react-icons/gi";
@@ -113,7 +113,7 @@ export default function RealEstatePage({ params }: { params: { id: string } }) {
       </div>
 
       {/* Body */}
-      <div className="min-h-[100rem] h-[100rem] flex mt-[1.5rem] ">
+      <div className="min-h-[100rem] h-[100rem] flex mt-[1.5rem]">
         {/* Left */}
         <div className="h-full min-w-0 grow px-[1.5rem]">
           <div className="w-full flex justify-between items-center">
@@ -123,7 +123,7 @@ export default function RealEstatePage({ params }: { params: { id: string } }) {
             </div>
             <div className="text-gray-500 text-[1.6rem] italic"></div>
           </div>
-          <p className="mt-[1.5rem] text-justify text-gray-800">
+          <p className="mt-[1.5rem] text-justify text-gray-800 dark:text-white">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec lectus eros. Integer suscipit tortor et tempus congue. Nunc vitae elit
             vitae nisi convallis tristique id vitae est. Aliquam non libero accumsan, elementum nisl eu, eleifend purus. Aliquam a velit lacus. Lorem
             ipsum dolor sit amet, consectetur adipiscing elit. Integer vehicula ut justo quis convallis. Cras ultricies ultricies dictum. In sed
@@ -140,7 +140,7 @@ export default function RealEstatePage({ params }: { params: { id: string } }) {
               <FaLocationDot size={24} className="mr-2" />
               <span className="font-bold text-[2.6rem]">Endereço</span>
             </div>
-            <div className="text-gray-500 text-[1.6rem] italic">Rua Travessa Pio XII, 34, Cancelli, Cascavel, PR</div>
+            <div className="text-[1.6rem] italic text-gray-500 dark:text-white">Rua Travessa Pio XII, 34, Cancelli, Cascavel, PR</div>
           </div>
 
           <div className="w-full grid grid-cols-2 gap-[1.5rem] mt-[1.5rem]">
@@ -172,8 +172,8 @@ export default function RealEstatePage({ params }: { params: { id: string } }) {
         </div>
 
         {/* Right */}
-        <div className="h-full min-w-[50rem] ml-[1.5rem]">
-          <Card className="h-[30rem] w-full flex flex-col p-[1.5rem]">
+        <div className="h-full min-w-[50rem] ml-[1.5rem] relative">
+          <Card className="h-[30rem] w-full flex flex-col p-[1.5rem] sticky top-0">
             <div className="min-h-0 grow flex flex-col">
               <div className="flex justify-between">
                 <span className="font-bold text-[2.2rem]">Informações</span>
@@ -181,11 +181,11 @@ export default function RealEstatePage({ params }: { params: { id: string } }) {
               </div>
 
               <div className="min-h-0 grow flex flex-col justify-center items-center">
-                <span className="text-[1.6rem]">Preço</span>
+                <span className="text-[1.6rem] italic">Valor do imóvel</span>
                 <span className="text-[3.6rem] font-extrabold tracking-widest">R$ {realEstateSelected?.price.toLocaleString()}</span>
               </div>
 
-              <Card className="flex justify-center py-[0.5rem]">
+              <Card className="flex justify-center py-[0.5rem] dark:bg-secondary">
                 <div className="flex items-center px-[1rem]">
                   <FaBed size={16} color="text-foreground" className="mr-2" />
                   <span>2</span>
@@ -210,7 +210,9 @@ export default function RealEstatePage({ params }: { params: { id: string } }) {
                 <FaWhatsapp size={20} />
                 <span className="font-bold text-[1.6rem] ml-[1rem]">Contato</span>
               </Card>
-              <div className="w-[5rem] bg-red-500 rounded-[0.8rem] ml-[1.5rem]"></div>
+              <Card className="w-[5rem] flex justify-center items-center rounded-[0.8rem] ml-[1.5rem] dark:bg-secondary">
+                <MdShare size={18} />
+              </Card>
             </div>
           </Card>
         </div>
