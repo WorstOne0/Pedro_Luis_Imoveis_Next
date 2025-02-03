@@ -3,7 +3,7 @@
 // Next
 import Link from "next/link";
 // Hooks
-import { useApiFetch } from "@/hooks";
+import { useApiFetch, useLogEvent } from "@/hooks";
 // Store
 import { useRealEstateStore } from "@/store";
 // Components
@@ -18,6 +18,8 @@ import { GiExpand } from "react-icons/gi";
 import { useRef } from "react";
 
 export default function RealEstatePage({ params }: { params: { id: string } }) {
+  useLogEvent("page_view", { page: "RealEstatePage", route: `/real_estate/${params.id}` });
+
   const { realEstateSelected, setRealEstateSelected } = useRealEstateStore((state) => state);
 
   const { isLoading } = useApiFetch({ url: `http://localhost:4000/real_estate/${params.id}`, method: "post" }, setRealEstateSelected);

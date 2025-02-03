@@ -35,7 +35,7 @@ const analyticsEvent = (eventName: string, params?: Record<string, any>) => {
 
   const { analytics } = initializeFirebaseApp();
 
-  logEvent(analytics, eventName, params);
+  if (analytics) logEvent(analytics, eventName, params);
 };
 
 export { initializeFirebaseApp, analyticsEvent };

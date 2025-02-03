@@ -3,19 +3,19 @@
 // Next
 import { useState } from "react";
 import { MarkerF } from "@react-google-maps/api";
-import { useApiFetch } from "@/hooks";
+import { useApiFetch, useLogEvent } from "@/hooks";
 // Store
 import { RealEstate } from "@/store/real_estate";
 import { useRealEstateStore, useSearchBarStore } from "@/store";
 // Components
 import { DistrictPolygons, GoogleMaps, RealEstateCard, Searchbar } from "@/components";
-// Styles
-// import styles from "./styles.module.css";
 
 import apartament_icon from "@/../public/apartament_icon.png";
 import house_icon from "@/../public/house_icon.png";
 
 export default function Home() {
+  useLogEvent("page_view", { page: "Home", route: "/" });
+
   const { realEstateList, setRealEstateList, setRealEstateSelected } = useRealEstateStore((state) => state);
   const { isSearchOpen } = useSearchBarStore((state) => state);
 
