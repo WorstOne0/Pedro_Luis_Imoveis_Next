@@ -15,9 +15,10 @@ import { MdDescription, MdShare } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
 import { PiGarage } from "react-icons/pi";
 import { GiExpand } from "react-icons/gi";
-import { useRef } from "react";
+import { useRef, use } from "react";
 
-export default function RealEstatePage({ params }: { params: { id: string } }) {
+export default function RealEstatePage(props: { params: Promise<{ id: string }> }) {
+  const params = use(props.params);
   useLogEvent("page_view", { page: "RealEstatePage", route: `/real_estate/${params.id}` });
 
   const { realEstateSelected, setRealEstateSelected } = useRealEstateStore((state) => state);
