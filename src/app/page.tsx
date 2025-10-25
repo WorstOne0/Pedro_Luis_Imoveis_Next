@@ -23,7 +23,10 @@ export default function Home() {
 
   const [map, setMap] = useState<google.maps.Map | null>(null);
 
-  //
+  const onCreateMap = (map: google.maps.Map) => {
+    setMap(map);
+  };
+
   const createMarkers = (realEstate: RealEstate) => {
     const icon = {
       url: resolveTypeIcon(realEstate.type).src,
@@ -48,7 +51,7 @@ export default function Home() {
 
   return (
     <div className="h-full w-full relative">
-      <GoogleMaps setMap={setMap}>
+      <GoogleMaps onCreateMap={onCreateMap}>
         {realEstateList.map((item, index) => createMarkers(item))}
         {isSearchOpen ? <DistrictPolygons map={map} /> : null}
       </GoogleMaps>
