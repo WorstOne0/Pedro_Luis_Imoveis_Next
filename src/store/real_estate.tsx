@@ -17,6 +17,9 @@ export type RealEstate = {
   //
   thumbnail: string;
   images: string[];
+  //
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export type Address = {

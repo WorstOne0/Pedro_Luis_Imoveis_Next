@@ -57,10 +57,7 @@ export default function Searchbar({ children }: { children?: React.ReactNode }) 
         newPropertyType = [...filter.propertyType, type];
       }
 
-      setFilter((prev) => ({
-        ...prev,
-        propertyType: newPropertyType,
-      }));
+      setFilter((prev) => ({ ...prev, propertyType: newPropertyType }));
     };
 
     return (

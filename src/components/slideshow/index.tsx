@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable @typescript-eslint/no-unsafe-function-type */
 /* eslint-disable react-hooks/exhaustive-deps */
 
 // Next
@@ -31,7 +33,6 @@ const Slideshow = forwardRef<SlideshowHandle, SlideshowProps>(({ images }, ref) 
   const toggleSlideshow = () => setIsSlideshowOpen((prev) => !prev);
 
   //
-
   const [isSlideshowOpen, setIsSlideshowOpen] = useState(false);
   const [mySlideshow, setMySlideshow] = useState({
     currentIndex: 0,
@@ -107,14 +108,9 @@ const Slideshow = forwardRef<SlideshowHandle, SlideshowProps>(({ images }, ref) 
         </div>
         <div className="h-full min-w-0 grow flex items-center overflow-x-auto mx-[2rem]" style={{ scrollbarWidth: "none" }} ref={slideshowDivRef}>
           {mySlideshow.images.map((image, index) => (
-            <div
-              key={`slideshow_image_${index}`}
-              className={`h-[80%] min-w-[100%] w-[100%] bg-contain bg-no-repeat bg-center rounded-[0.8rem]`}
-              style={{
-                backgroundImage: `url(${image})`,
-                // minWidth: calc(100vw - 12rem - 2rem - 4rem)
-              }}
-            ></div>
+            <div key={`slideshow_image_${index}`} className={`h-[80%] min-w-[100%] w-[100%] relative rounded-[0.8rem]`}>
+              <img className={`h-[100%] w-[100%] rounded-[0.8rem] object-contain object-center`} src={image} alt="" />
+            </div>
           ))}
         </div>
         <div className="h-[90%] min-w-[6rem] w-[6rem] flex justify-center items-center cursor-pointer hover:bg-gray-500/[0.2]" onClick={nextPage}>
@@ -126,12 +122,11 @@ const Slideshow = forwardRef<SlideshowHandle, SlideshowProps>(({ images }, ref) 
           {mySlideshow.images.map((image, index) => (
             <div
               key={`footer_${index}`}
-              className={"h-[80%] min-w-[20rem] w-[20rem] mr-[2.5rem] bg-contain bg-no-repeat bg-center rounded-[0.8rem] cursor-pointer"}
-              style={{
-                backgroundImage: `url(${image})`,
-              }}
+              className={"h-[80%] min-w-[20rem] w-[20rem] mr-[2.5rem] relative rounded-[0.8rem] cursor-pointer"}
               onClick={() => goToIndex(index)}
-            ></div>
+            >
+              <img className={`h-[100%] w-[100%] rounded-[0.8rem] object-cover object-center`} src={image} alt="" />
+            </div>
           ))}
         </div>
       </div>

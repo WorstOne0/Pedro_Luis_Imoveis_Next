@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 // Next
@@ -22,7 +23,6 @@ export default function RealEstatePage(props: { params: Promise<{ id: string }> 
   useLogEvent("page_view", { page: "RealEstatePage", route: `/real_estate/${params.id}` });
 
   const { realEstateSelected, setRealEstateSelected } = useRealEstateStore((state) => state);
-
   const { isLoading } = useApiFetch({ url: `http://localhost:4000/real_estate/${params.id}`, method: "post" }, setRealEstateSelected);
 
   const slideshowRef = useRef<SlideshowHandle>(null);
@@ -31,50 +31,19 @@ export default function RealEstatePage(props: { params: Promise<{ id: string }> 
     return <div>Loading...</div>;
   }
 
+  if (!realEstateSelected) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="max-h-full w-full p-[1.5rem] flex flex-col overflow-y-auto">
       {/* Slideshow */}
-      <Slideshow
-        ref={slideshowRef}
-        images={[
-          "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg",
-          "https://plus.unsplash.com/premium_photo-1689609950112-d66095626efb?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8aG91c2V8ZW58MHx8MHx8fDA%3D",
-          "https://static.vecteezy.com/system/resources/thumbnails/023/308/330/small_2x/ai-generative-exterior-of-modern-luxury-house-with-garden-and-beautiful-sky-photo.jpg",
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwsfo9NC1pzBgR2nmp8LIBDIPbZSqODx4Sg&s",
-        ]}
-      />
+      <Slideshow ref={slideshowRef} images={[realEstateSelected.thumbnail, ...realEstateSelected.images]} />
 
       {/* Image */}
       <div className={`min-h-[50vh] w-full flex justify-between`}>
-        <div
-          className={`min-h-[50vh] w-[85%] rounded-[0.8rem] bg-cover bg-no-repeat bg-center relative cursor-pointer`}
-          style={{ backgroundImage: `url(${realEstateSelected?.thumbnail})` }}
-          onClick={() => slideshowRef.current?.openSlideshow(0)}
-        >
+        <div className={`min-h-[50vh] w-[85%] rounded-[0.8rem]  relative cursor-pointer`} onClick={() => slideshowRef.current?.openSlideshow(0)}>
+          <img className={`h-[100%] w-[100%] rounded-[0.8rem] object-cover object-center`} src={realEstateSelected.thumbnail} alt="" />
           <Link
             href={"/"}
             className="h-[4rem] w-[4rem] absolute top-[1rem] left-[1rem] bg-background rounded-[0.8rem] cursor-pointer flex justify-center items-center"
@@ -83,29 +52,24 @@ export default function RealEstatePage(props: { params: Promise<{ id: string }> 
           </Link>
         </div>
         <div className={`min-h-[50vh] w-[15%] rounded-[0.8rem] flex flex-col justify-between ml-[1.5rem]`}>
-          <div
-            className={`h-[32%] w-[100%] rounded-[0.8rem] bg-cover bg-no-repeat bg-center cursor-pointer`}
-            style={{
-              backgroundImage: `url("https://plus.unsplash.com/premium_photo-1689609950112-d66095626efb?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8aG91c2V8ZW58MHx8MHx8fDA%3D")`,
-            }}
-            onClick={() => slideshowRef.current?.openSlideshow(1)}
-          ></div>
-          <div
-            className={`h-[32%] w-[100%] rounded-[0.8rem] bg-cover bg-no-repeat bg-center cursor-pointer`}
-            style={{
-              backgroundImage: `url("https://static.vecteezy.com/system/resources/thumbnails/023/308/330/small_2x/ai-generative-exterior-of-modern-luxury-house-with-garden-and-beautiful-sky-photo.jpg")`,
-            }}
-            onClick={() => slideshowRef.current?.openSlideshow(2)}
-          ></div>
+          <div className={`h-[32%] w-[100%] rounded-[0.8rem] relative cursor-pointer`} onClick={() => slideshowRef.current?.openSlideshow(1)}>
+            <img className={`h-[100%] w-[100%] rounded-[0.8rem] object-cover object-center`} src={realEstateSelected.images[0]} alt="" />
+          </div>
+          <div className={`h-[32%] w-[100%] rounded-[0.8rem] relative cursor-pointer`} onClick={() => slideshowRef.current?.openSlideshow(2)}>
+            <img className={`h-[100%] w-[100%] rounded-[0.8rem] object-cover object-center`} src={realEstateSelected.images[1]} alt="" />
+          </div>
           <div className={`h-[32%] w-[100%] rounded-[0.8rem] overflow-hidden relative`}>
-            <div
-              className={`h-[100%] w-[100%] rounded-[0.8rem] bg-cover bg-no-repeat bg-center cursor-pointer`}
-              style={{ backgroundImage: `url(${realEstateSelected?.thumbnail})`, filter: "blur(8px)" }}
-              onClick={() => slideshowRef.current?.openSlideshow(0)}
-            ></div>
+            <div className={`h-[100%] w-[100%] rounded-[0.8rem] relative cursor-pointer`} onClick={() => slideshowRef.current?.openSlideshow(0)}>
+              <img
+                className={`h-[100%] w-[100%] rounded-[0.8rem] object-cover object-center`}
+                style={{ filter: "blur(8px)" }}
+                src={realEstateSelected.images[1]}
+                alt=""
+              />
+            </div>
             <div className="flex flex-col absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] select-none">
               <span className="text-[2.2rem] font-bold text-center text-white" style={{ textShadow: "0 0 4px #000" }}>
-                +16
+                +{realEstateSelected.images.length}
               </span>
               <span className="text-[1.4rem] font-bold text-center text-white" style={{ textShadow: "0 0 4px #000" }}>
                 Ver todas as fotos
@@ -126,50 +90,46 @@ export default function RealEstatePage(props: { params: Promise<{ id: string }> 
             </div>
             <div className="text-gray-500 text-[1.6rem] italic"></div>
           </div>
-          <p className="mt-[1.5rem] text-justify text-gray-800 dark:text-white">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec lectus eros. Integer suscipit tortor et tempus congue. Nunc vitae elit
-            vitae nisi convallis tristique id vitae est. Aliquam non libero accumsan, elementum nisl eu, eleifend purus. Aliquam a velit lacus. Lorem
-            ipsum dolor sit amet, consectetur adipiscing elit. Integer vehicula ut justo quis convallis. Cras ultricies ultricies dictum. In sed
-            interdum arcu. Ut vitae urna orci. Sed sed finibus nibh. Integer sit amet libero eu velit convallis dictum. In hac habitasse platea
-            dictumst. Nullam euismod ultricies metus. Morbi tincidunt lacinia massa, ut egestas velit cursus ac. Sed varius massa ut ex lobortis
-            consectetur. Aliquam vel lectus sed dolor pharetra faucibus. Sed blandit ornare ante, id convallis nisl vehicula a. Sed a porta eros. Ut
-            tempor elit felis, nec dictum enim auctor vestibulum. Aliquam lacus dui, auctor vel dictum quis, consectetur non urna. Sed cursus, felis
-            sed volutpat rutrum, elit nunc dapibus elit, eu mattis nunc velit sit amet nunc. Nunc nec lacus at nulla ultrices imperdiet id nec tortor.
-            Ut ac tempus tellus.
-          </p>
+          <p className="mt-[1.5rem] text-justify text-gray-800 dark:text-white">{realEstateSelected.description}</p>
 
           <div className="mt-[3rem] w-full flex justify-between items-center">
             <div className="flex items-center">
               <FaLocationDot size={24} className="mr-2" />
               <span className="font-bold text-[2.6rem]">Endereço</span>
             </div>
-            <div className="text-[1.6rem] italic text-gray-500 dark:text-white">Rua Travessa Pio XII, 34, Cancelli, Cascavel, PR</div>
+            <div className="text-[1.6rem] italic text-gray-500 dark:text-white">
+              {realEstateSelected.address.street}, {realEstateSelected.address.number}, {realEstateSelected.address.district},{" "}
+              {realEstateSelected.address.city}, {realEstateSelected.address.state}
+            </div>
           </div>
 
           <div className="w-full grid grid-cols-2 gap-[1.5rem] mt-[1.5rem]">
             <Card className="flex justify-between items-center px-[1.5rem] py-[0.5rem]">
               <span className="font-bold">Cidade</span>
-              <span className="italic">Cascavel</span>
+              <span className="italic">{realEstateSelected.address.city}</span>
             </Card>
             <Card className="flex justify-between items-center px-[1.5rem] py-[0.5rem]">
               <span className="font-bold">Estado</span>
-              <span className="italic">Paraná</span>
+              <span className="italic">{realEstateSelected.address.state}</span>
             </Card>
             <Card className="flex justify-between items-center px-[1.5rem] py-[0.5rem]">
               <span className="font-bold">CEP</span>
-              <span className="italic">85811-310</span>
+              <span className="italic">{realEstateSelected.address.cep}</span>
             </Card>
             <Card className="flex justify-between items-center px-[1.5rem] py-[0.5rem]">
               <span className="font-bold">Bairro</span>
-              <span className="italic">Cancelli</span>
+              <span className="italic">{realEstateSelected.address.district}</span>
             </Card>
             <Card className="flex justify-between items-center px-[1.5rem] py-[0.5rem]">
               <span className="font-bold">Rua</span>
-              <span className="italic">Travessa Pio XII</span>
+              <span className="italic">{realEstateSelected.address.street}</span>
             </Card>
             <Card className="flex justify-between items-center px-[1.5rem] py-[0.5rem]">
               <span className="font-bold">Número / Comp.</span>
-              <span className="italic">34, Esquina</span>
+              <span className="italic">
+                {realEstateSelected.address.number}
+                {realEstateSelected.address.complement ? ` / ${realEstateSelected.address.complement}` : ""}
+              </span>
             </Card>
           </div>
         </div>
@@ -185,7 +145,7 @@ export default function RealEstatePage(props: { params: Promise<{ id: string }> 
 
               <div className="min-h-0 grow flex flex-col justify-center items-center">
                 <span className="text-[1.6rem] italic">Valor do imóvel</span>
-                <span className="text-[3.6rem] font-extrabold tracking-widest">R$ {realEstateSelected?.price.toLocaleString()}</span>
+                <span className="text-[3.6rem] font-extrabold tracking-widest">R$ {realEstateSelected.price.toLocaleString()}</span>
               </div>
 
               <Card className="flex justify-center py-[0.5rem] dark:bg-secondary">

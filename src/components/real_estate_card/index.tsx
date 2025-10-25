@@ -1,3 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable @typescript-eslint/no-unsafe-function-type */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 // Next
@@ -51,10 +54,9 @@ export default function RealEstateCard({ realEstate, onClickCallback }: { realEs
       )}
 
       {/* Imagem */}
-      <div
-        className={`h-[19rem] w-full rounded-[0.8rem] bg-cover bg-no-repeat bg-center relative`}
-        style={{ backgroundImage: `url(${realEstate.thumbnail})` }}
-      >
+      <div className={`h-[22rem] w-full rounded-[0.8rem] relative`}>
+        <img className={`h-[100%] w-[100%] rounded-[0.8rem] object-cover object-center`} src={realEstate.thumbnail} alt="" />
+
         <div className="absolute bottom-4 right-4" onClick={handleFavoriteClick}>
           {isFavorited ? <FaBookmark color="red" /> : <FaRegBookmark color="red" />}
         </div>
@@ -93,7 +95,10 @@ export default function RealEstateCard({ realEstate, onClickCallback }: { realEs
         {/* Footer */}
         <div className="flex items-center select-text mt-4">
           <FaLocationDot size={14} color="red" className="mr-2" />
-          <span className="text-[1.4rem] italic leading-6">Rua Travessa Pio XII, 34, Cancelli, Cascavel, PR</span>
+          <span className="text-[1.4rem] italic leading-6">
+            {realEstate?.address.street}, {realEstate?.address.number}, {realEstate?.address.district}, {realEstate?.address.city},{" "}
+            {realEstate?.address.state}
+          </span>
         </div>
       </div>
     </Card>
